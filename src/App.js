@@ -4,11 +4,12 @@ import './App.css';
 
 function App() {
     const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.post('https://quiet-retreat-33488.herokuapp.com/webhook', {
+                const response = await axios.post('https://quiet-retreat-33488-bbffeff0b17d.herokuapp.com/webhook', {
                     message: {
                         from: {
                             id: '123456789', // Replace with actual user ID from Telegram
@@ -17,13 +18,18 @@ function App() {
                     }
                 });
                 setUserData(response.data);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
+            } catch (err) {
+                console.error('Error fetching user data:', err);
+                setError('Error fetching user data. Please try again later.');
             }
         };
 
         fetchUserData();
     }, []);
+
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     if (!userData) {
         return <div>Loading...</div>;
