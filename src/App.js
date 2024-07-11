@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.post('/webhook', {
+        const response = await axios.post('https://quiet-retreat-33488-bbffeff0b17d.herokuapp.com/webhook', {
           message: {
             from: {
               id: '123456789', // Replace with actual user ID from Telegram
